@@ -19,8 +19,8 @@ export async function getAll(page = 1, limit = 20) {
 export async function getOne(id) {
     return await user_model.getOne(id);
 }
-export async function getOneByUser(user_name) {
-    return await user_model.getOneByUser(user_name);
+export async function getOneByUser(user_name,pass) {
+    return await user_model.getOneByUser(user_name,pass);
 }
 
 export async function updateOne(userId,payload) {

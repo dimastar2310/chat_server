@@ -29,11 +29,11 @@ export async function getOne(userId) {
     const filter = { _id: new ObjectId(userId) };
     return await users.findOne(filter);
 }
-export async function getOneByUser(user_name) {
+export async function getOneByUser(user_name,pass) {
     const users = db.collection("Dima");
     // const filter = { _id: userId };
     log.red("at user.model")
-    const filter = { user: user_name };
+    const filter = { user: user_name,password:pass };
     return await users.findOne(filter);
 }
 

@@ -42,6 +42,21 @@ router.post("/", raw( async (req, res) => {
     const user = await user_controller.create(req.body);
     res.status(200).json(user);
 }) );
+// GETS A SINGLE by user and password
+router.post("/up",raw(async (req, res,next) => {
+  const { user, password } = req.body;
+  const user2 = await user_controller.getOneByUser(user,password);
+  //console.log("the username is ?",user);
+  //console.log("the password is ?",password);
+
+  if (!user2) return res.status(404).json({ status: "No user found." });
+  res.status(200).json(user2);
+  // Assuming '/chat' is a frontend route, send a response indicating success.
+  //next('route')
+})
+);
+
+
 
 // GET ALL USERS
 router.get( "/",raw(async ( req , res) => {
@@ -68,14 +83,7 @@ router.get("/:id",raw(async (req, res) => {
     res.status(200).json(user);
   })
 );
-// GETS A SINGLE by user
-router.get("/:user",raw(async (req, res) => {
-  const user = await user_controller.getOneByUser(req.params.user)
-  console.log("the username is ?",req.body.user);
-  if (!user) return res.status(404).json({ status: "No user found." });
-  res.status(200).json(user);
-})
-);
+
 // UPDATES A SINGLE USER
 router.put("/:id",raw(async (req, res) => {
     const user = await user_controller.updateOne(req.params.id,req.body);

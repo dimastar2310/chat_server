@@ -6,6 +6,8 @@ import cors from 'cors'
 
 import {connect_db} from './db/mongo.connection.mjs';
 import user_router from './modules/user/user.router.mjs';
+import chat_router from './modules/chat/chat.router.mjs';
+
 
 import {error_handler,error_handler2,not_found} from './middleware/errors.handler.mjs';   
 
@@ -27,11 +29,12 @@ app.use(morgan('dev'));
 // routing
 // app.use('/api/stories', story_router);
 app.use('/api/users', user_router);
+app.use('/api/users', chat_router);
 
 // central error handling
 //if error happens does functionion will be triggered
-app.use(error_handler);
-app.use(error_handler2);
+//app.use(error_handler);
+//app.use(error_handler2);
 
 //when no routes were matched...
 app.use('*', not_found);
